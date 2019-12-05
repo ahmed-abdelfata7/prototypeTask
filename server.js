@@ -1,14 +1,25 @@
+/**
+ * @author Ahmed Mahmoud
+ * @description
+ * This is the entry point of backend app
+ */
 "use strict";
+//importing used modules
 const express = require("express");
 const bodyParser = require("body-parser");
-const app = express();
 require("dotenv").config();
+require("./utils/dbConnection");
+//create express app
+const app = express();
+//server configuration
 const PORT = process.env.SERVER_PORT || 6000;
 const HOST = process.env.SERVER_IP || "http://localhost";
-require("./utils/dbConnection");
+//body parser configuration
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+//routes
+require("./src/routes")(app);
+//running express server
 app.listen(PORT, () => {
   console.log(`Server is running at ${HOST}:${PORT}`);
 });
