@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const remoteDB = process.env.DB_URL;
 const dbURL = "mongodb://localhost:27017/starwars";
 mongoose.connect(
-  dbURL,
+  remoteDB,
   { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Database connected successfully");
