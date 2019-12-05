@@ -13,6 +13,12 @@ const SessionController = require("./sessions");
 const saltRounds = 10;
 
 class UsersController {
+  /**
+   * @name save
+   * @description save user account details
+   * @param {Object}
+   * @returns {Object}
+   */
   async save(user) {
     let { name, email, password } = user;
     let check = await this.validateUser(user);
@@ -34,6 +40,12 @@ class UsersController {
       return apiResponse(["Error happened!!"], null);
     }
   }
+  /**
+   * @name validateUser
+   * @description validate user account mandatory fileds
+   * @param {Object}
+   * @returns {Array}
+   */
   async validateUser(user) {
     let { name, email, password } = user;
     const errors = [];

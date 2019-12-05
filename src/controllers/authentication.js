@@ -11,6 +11,12 @@ const ApiResponse = require("./../../utils/APIResponse");
 const errorMSG = require("./../../utils/errorMsg");
 const SessionController = require("./../controllers/sessions");
 class AuthController {
+  /**
+   * @name login
+   * @description check if account is valid or not
+   * @param {Object}
+   * @returns {Object}
+   */
   async login(account) {
     let { email, password } = account;
     let checkRequired = this.required(account);
@@ -31,6 +37,12 @@ class AuthController {
       }
     }
   }
+  /**
+   * @name required
+   * @description validate mandatory fields
+   * @param {Object}
+   * @returns {Array}
+   */
   required(account) {
     const errors = [];
     let { password, email } = account;
@@ -38,6 +50,12 @@ class AuthController {
     !password ? errors.push("Password is required!") : null;
     return errors;
   }
+  /**
+   * @name checkAuthorization
+   * @description check if token exist in db or not
+   * @param {String}
+   * @returns {Boolean}
+   */
   async checkAuthorization(token) {
     let tokenDetails = await SessionController.get({ token });
     if (!tokenDetails) {
@@ -46,6 +64,12 @@ class AuthController {
       return true;
     }
   }
+  /**
+   * @name logout
+   * @description delete user token
+   * @param {String}
+   * @returns {Object}
+   */
   async logout(token) {
     if (token) {
       //check token existance
