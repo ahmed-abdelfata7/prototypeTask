@@ -9,10 +9,10 @@
 const mongoose = require("mongoose");
 
 module.exports = {
-  async find(collectionName) {
+  async find(collectionName, condition) {
     return await mongoose.connection.db
       .collection(collectionName)
-      .find()
+      .find(condition)
       .toArray();
   }
 };
