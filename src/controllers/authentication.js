@@ -24,7 +24,7 @@ class AuthController {
       //check password here
       let check = await bcrypt.compare(password, user.password);
       if (check) {
-        let tokenDetails = await SessionController.get(user._id);
+        let tokenDetails = await SessionController.get({ userId: user._id });
         return ApiResponse(null, { token: tokenDetails.token });
       } else {
         return ApiResponse(errorMSG.AUTH_ERROR, null);
@@ -37,6 +37,27 @@ class AuthController {
     !email ? errors.push("Email is required!") : null;
     !password ? errors.push("Password is required!") : null;
     return errors;
+  }
+  async checkAuthorization(token) {
+    let tokenDetails = await SessionController.get({ token });
+    if (!tokenDetails) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  async logout(token) {
+    if (token) {
+      //check token existance
+      let tokenDetails = await this.checkAuthorization(token);
+      if (!tokenDetails) {
+        return ApiResponse(errorMSG.INVALID_TOKEN, null);
+      }
+      await SessionController.delete(token);
+      return ApiResponse(null, "Logged out successfully");
+    } else {
+      return ApiResponse(errorMSG.TOKEN_MISSED, null);
+    }
   }
 }
 module.exports = new AuthController();

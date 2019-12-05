@@ -14,9 +14,12 @@ class SessionsController {
     let newToken = new Session({ userId, token });
     await newToken.save();
   }
-  async get(userId) {
-    let token = await Session.findOne({ userId });
+  async get(object) {
+    let token = await Session.findOne(object);
     return token;
+  }
+  async delete(token) {
+    await Session.findOneAndRemove({ token });
   }
 }
 module.exports = new SessionsController();

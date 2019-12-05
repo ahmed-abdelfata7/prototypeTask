@@ -10,4 +10,9 @@ module.exports = app => {
     let login = await AuthController.login(req.body);
     return res.json(login);
   });
+  app.get(`${ApiURL}/logout`, async (req, res, next) => {
+    let token = req.headers["token"];
+    let logout = await AuthController.logout(token);
+    return res.json(logout);
+  });
 };
