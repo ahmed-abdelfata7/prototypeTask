@@ -22,3 +22,7 @@ and a remote colletions served on a remote server(films,people,planets,species,t
    - allow create permission(monolithic application).
    - after authentication based on local-db via API call we can answer the questions(star war statistics) but this way is very slow.
    - create a two micro-service one for authentication and the other for  star war statistics.
+   
+  
+## API-doc
+   you can find API-specs https://github.com/EngAhmedMahmoud/prototypeTask/tree/master/api-doc
