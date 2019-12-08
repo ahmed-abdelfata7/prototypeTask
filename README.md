@@ -16,7 +16,7 @@ and a remote colletions served on a remote server(films,people,planets,species,t
    
  - Testing:
  
-   `npm test`
+   `npm run test:watch`
    
    **Note**: I don't have a right with remote db to create new schemas (users,session) so  this issue can be solved by one of these:
    - allow create permission(monolithic application).
