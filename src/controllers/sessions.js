@@ -39,5 +39,12 @@ class SessionsController {
   async delete(token) {
     await Session.findOneAndRemove({ token });
   }
+  /**
+   * @name delete
+   * @description delete sessions by userId
+   */
+  async deleteByUserId(userId) {
+    await Session.deleteMany({ userId });
+  }
 }
 module.exports = new SessionsController();

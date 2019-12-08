@@ -21,7 +21,6 @@ class StatisticsController {
         ? pre
         : curr;
     }, 0);
-    await this.mostPersonAppeared();
     return longestFilm;
   }
   /**
@@ -57,6 +56,35 @@ class StatisticsController {
     let personDetails = await this.personDetails(mostRepeatedPerson);
     return personDetails;
   }
+  async mostSpeciesAppeared() {
+    return {
+      title: "requirement not clear"
+    };
+  }
+  async plantWithMostPilots() {
+    return {
+      title: "requirement not clear"
+    };
+  }
+  /**
+   * @name allStatistics
+   * @description get mostPersonAppeared,longestOpeningCrawl
+   * @returns {Object}
+   */
+  async allStatistics() {
+    let longestOpenCrawl = await this.longestOpeningCrawl();
+    let mostPersonAppear = await this.mostPersonAppeared();
+    let mostSpeciesAppeared = await this.mostSpeciesAppeared();
+    let plantWithPilots = await this.plantWithMostPilots();
+    let ResponseData = {
+      openingCrawl: longestOpenCrawl.title,
+      personAppeared: mostPersonAppear[0].name,
+      mostSpeciesAppeared: mostSpeciesAppeared.title,
+      plantWithPilots: plantWithPilots.title
+    };
+    return ResponseData;
+  }
+
   /**
    * @name allFilms
    * @description fetch all movies from DB

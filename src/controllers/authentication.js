@@ -30,6 +30,9 @@ class AuthController {
       //check password here
       let check = await bcrypt.compare(password, user.password);
       if (check) {
+        //remove all sessions and save a new session
+        await SessionController.deleteByUserId(user._id);
+        await SessionController.save(user._id);
         let tokenDetails = await SessionController.get({ userId: user._id });
         return ApiResponse(null, { token: tokenDetails.token });
       } else {
@@ -37,6 +40,7 @@ class AuthController {
       }
     }
   }
+
   /**
    * @name required
    * @description validate mandatory fields

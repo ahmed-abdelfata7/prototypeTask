@@ -6,6 +6,7 @@
 const ApiResponse = require("./../../utils/APIResponse");
 const errorMSG = require("./../../utils/errorMsg");
 const AuthController = require("./../controllers/authentication");
+
 module.exports = app => {
   app.use(async (req, res, next) => {
     let token = req.headers["token"];
