@@ -9,9 +9,7 @@ const User = require("./../models/User");
 const apiResponse = require("./../../utils/APIResponse");
 const bcrypt = require("bcrypt");
 const SessionController = require("./sessions");
-
 const saltRounds = 10;
-
 class UsersController {
   /**
    * @name save

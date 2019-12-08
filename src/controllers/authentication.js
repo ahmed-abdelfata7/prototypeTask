@@ -52,6 +52,7 @@ class AuthController {
     let { password, email } = account;
     !email ? errors.push("Email is required!") : null;
     !password ? errors.push("Password is required!") : null;
+    email && !this.validateEmail(email) ? errors.push("Not Valid email") : null;
     return errors;
   }
   /**
@@ -86,6 +87,15 @@ class AuthController {
     } else {
       return ApiResponse(errorMSG.TOKEN_MISSED, null);
     }
+  }
+  /**
+   * @name validateEmail
+   * @param {String}
+   * @returns {Boolean}
+   */
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 }
 module.exports = new AuthController();
