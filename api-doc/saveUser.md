@@ -17,3 +17,28 @@
 | name     | username    | Yes        | N/A     | string         | string    |
 | email    | user email  | Yes        | N/A     | string         | string    |
 | password | password    | Yes        | N/A     | string         | string    |
+
+- Success Response:
+
+```
+{
+    "success": true,
+    "data": {
+        "id": "5decaba60a23b14632998e1a",
+        "name": "ahmed",
+        "email": "ahmed@ahmed.com"
+    }
+}
+```
+
+- Failure Response:
+
+```
+{
+    "success": false,
+    "errors": [
+        "Email already exist!"
+    ]
+}
+
+```
