@@ -25,9 +25,11 @@
 
 - Failure Response:
 
+```
 {
 "success": false,
 "errors": [
 "authentication error check your credentials!"
 ]
 }
+```
