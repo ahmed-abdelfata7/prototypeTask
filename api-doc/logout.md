@@ -12,16 +12,22 @@
 
 - Success Response:
 
+```
 {
 "success": true,
 "data": "Logged out successfully"
 }
 
+```
+
 - Failure Response:
 
+```
 {
 "success": false,
 "errors": [
 "Missed Token"
 ]
 }
+
+```
