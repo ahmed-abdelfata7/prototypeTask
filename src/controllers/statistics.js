@@ -15,7 +15,7 @@ class StatisticsController {
    * @returns {Object}
    */
   async longestOpeningCrawl() {
-    const films = await this.allFilms();
+    const films = await this.allData("films");
     let longestFilm = films.reduce((pre, curr) => {
       return pre && pre.opening_crawl.length > curr.opening_crawl.length
         ? pre
@@ -29,9 +29,8 @@ class StatisticsController {
    * who is most appeared in movies
    * @returns {Object}
    */
-
   async mostPersonAppeared() {
-    const films = await this.allFilms();
+    const films = await this.allData("films");
     const result = [];
     //get all persons
     films.forEach(film => {
@@ -56,10 +55,49 @@ class StatisticsController {
     let personDetails = await this.personDetails(mostRepeatedPerson);
     return personDetails;
   }
+  /**
+   * Most species appeared
+   */
   async mostSpeciesAppeared() {
+    const species = await this.allData("species");
+    let compare = 0;
+    let object;
+    //get all persons
+    species.forEach(spec => {
+      if (spec.people.length > compare) {
+        compare = spec.people.length;
+        object = spec;
+      }
+    });
     return {
-      title: "requirement not clear"
+      title: `${object.name}(${compare})`
     };
+  }
+
+  /**
+   * @name getAllPilots
+   * @description get all vehicle pilots
+   * @returns {Array}
+   */
+  async getAllVehicalPilots() {
+    const allVehPilots = await this.allData("vehicles");
+    const result = [];
+    //get all pilots
+    allVehPilots.forEach(vehical => {
+      result.push(...vehical.pilots);
+    });
+    console.log(result);
+    console.log("==================");
+    const plants = [];
+    for (let index = 0; index < result.length; index++) {
+      let pilotInfo = await this.getPilotPlant({ element: result[index] });
+      plants.push({ pilot: result[index], palnt: pilotInfo[0].homeworld });
+    }
+    console.log(plants);
+    return plants;
+  }
+  async getPilotPlant(pilot) {
+    return await this.personDetails(pilot);
   }
   async plantWithMostPilots() {
     return {
@@ -86,16 +124,16 @@ class StatisticsController {
   }
 
   /**
-   * @name allFilms
+   * @name allData
    * @description fetch all movies from DB
    * @returns {Array}
    */
 
-  async allFilms() {
-    let collectionName = "films";
-    const films = await dbInterface.find(collectionName, {});
-    return films;
+  async allData(collectionName) {
+    const data = await dbInterface.find(collectionName, {});
+    return data;
   }
+
   /**
    * @name personDetails
    * @description fetch person details from people schema
