@@ -29,7 +29,6 @@ class StatisticsController {
    * who is most appeared in movies
    * @returns {Object}
    */
-
   async mostPersonAppeared() {
     const films = await this.allData("films");
     const result = [];
@@ -57,6 +56,25 @@ class StatisticsController {
     return personDetails;
   }
   /**
+   * Most species appeared
+   */
+  async mostSpeciesAppeared() {
+    const species = await this.allData("species");
+    let compare = 0;
+    let object;
+    //get all persons
+    species.forEach(spec => {
+      if (spec.people.length > compare) {
+        compare = spec.people.length;
+        object = spec;
+      }
+    });
+    return {
+      title: `${object.name}(${compare})`
+    };
+  }
+
+  /**
    * @name getAllPilots
    * @description get all vehicle pilots
    * @returns {Array}
@@ -80,11 +98,6 @@ class StatisticsController {
   }
   async getPilotPlant(pilot) {
     return await this.personDetails(pilot);
-  }
-  async mostSpeciesAppeared() {
-    return {
-      title: "requirement not clear"
-    };
   }
   async plantWithMostPilots() {
     return {
