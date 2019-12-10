@@ -19,9 +19,10 @@ and a remote colletions served on a remote server(films,people,planets,species,t
    `npm run test:watch`
    
    **Note**: I don't have a right with remote db to create new schemas (users,session) so  this issue can be solved by one of these:
-   - allow create permission(monolithic application).
-   - after authentication based on local-db via API call we can answer the questions(star war statistics) but this way is very slow.
+   - allow write permission for remote hosted db(monolithic application).
+   - after authentication based on local-db via API call we can answer the questions(star war statistics) but this way is slow.
    - create a two micro-service one for authentication and the other for  star war statistics.
+   - My solution i have created a db interface that read data from remote db and save it to my local-db and also another hosted db.
    
   
 ## API-doc
