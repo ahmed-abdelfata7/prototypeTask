@@ -14,5 +14,10 @@ module.exports = {
       .collection(collectionName)
       .find(condition)
       .toArray();
+  },
+  async insertMany(collectionName, arr) {
+    return await mongoose.connection.db
+      .collection(collectionName)
+      .insertMany(arr);
   }
 };

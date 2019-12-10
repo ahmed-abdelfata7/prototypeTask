@@ -8,7 +8,6 @@ const StatisticsController = require("./../controllers/statistics");
 const ApiResponse = require("./../../utils/APIResponse");
 module.exports = app => {
   app.get(`${ApiURL}/statistics`, async (req, res, next) => {
-    await StatisticsController.mostSpeciesAppeared();
     try {
       let statistics = await StatisticsController.allStatistics();
       return res.json(ApiResponse(null, statistics));
